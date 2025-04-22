@@ -143,8 +143,8 @@ def evaluate_testset_with_visuals(X, y_true, y_pred, channel_names):
         print(f"IoU: {iou:.4f}\n{'-'*40}")
 
 # ✅ 학습 데이터 경로 설정 (수정된 부분)
-train_dir = "/home/aix23606/soyeon/ar/climatenet_full_train"
-test_dir = "/home/aix23606/soyeon/ar/climatenet_full_test"  # 추가된 부분
+train_dir = "/data0/aix23606/soyeon/climatenet_full_train"
+test_dir = "/data0/aix23606/soyeon/climatenet_full_test"  # 추가된 부분
 train_files = sorted(glob(os.path.join(train_dir, '*.nc')))
 test_files = sorted(glob(os.path.join(test_dir, '*.nc')))  # 추가된 부분
 
