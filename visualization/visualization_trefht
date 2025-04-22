@@ -1,0 +1,32 @@
+import netCDF4 as nc
+import matplotlib.pyplot as plt
+from mpl_toolkits.basemap import Basemap
+import numpy as np
+import cartopy.crs as ccrs
+from matplotlib.colors import LogNorm
+
+ncfile = nc.Dataset("C:/Users/seoye/ar/climatenet/test/data-2011-06-01-01-1_0.nc","r",format="nc")
+
+for i in ncfile.variables.keys():
+    if i == 'TREFHT':
+        TREFHT = ncfile.variables[i][:]
+        print(ncfile.variables[i].shape)
+        print(ncfile.variables[i][0, :, :])
+
+TREFHT = TREFHT[0, :, :]
+lat = ncfile.variables['lat'][:]
+lon = ncfile.variables['lon'][:]
+
+fig = plt.figure(figsize=(10, 8))
+ax = plt.axes(projection=ccrs.PlateCarree())
+
+pcm = ax.imshow(TREFHT, extent=[lon.min(), lon.max(), lat.min(), lat.max()], origin='lower', cmap='viridis')
+
+ax.coastlines() 
+ax.set_title('TREFHT Visualization')
+
+plt.colorbar(pcm, ax=ax, label='TREFHT Value')
+
+plt.title("TREFHT_visualization")
+plt.legend()
+plt.show()
